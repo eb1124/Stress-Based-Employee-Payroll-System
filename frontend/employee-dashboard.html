@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard - Stress Payroll System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-heartbeat"></i> Employee Portal</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#dashboard" class="active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a></li>
+                <li><a href="#profile" data-section="profile">
+                    <i class="fas fa-user"></i> Profile
+                </a></li>
+                <li><a href="#payslips" data-section="payslips">
+                    <i class="fas fa-file-invoice-dollar"></i> Payslips
+                </a></li>
+                <li><a href="#stress-tracking" data-section="stress-tracking">
+                    <i class="fas fa-chart-line"></i> Stress Tracking
+                </a></li>
+                <li><a href="#wellness" data-section="wellness">
+                    <i class="fas fa-heart"></i> Wellness Tips
+                </a></li>
+                <li><a href="#reminders" data-section="reminders">
+                    <i class="fas fa-bell"></i> Reminders
+                </a></li>
+                <li><a href="#" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="pageTitle">Dashboard</h1>
+                <div class="user-info">
+                    <span id="userName">Welcome, User</span>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+            
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="currentStressLevel">-</h3>
+                            <p>Current Stress Level</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="attendanceRate">-</h3>
+                            <p>Attendance Rate</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="monthlySalary">-</h3>
+                            <p>Monthly Salary</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="pendingReminders">-</h3>
+                            <p>Pending Reminders</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-charts">
+                    <div class="chart-container">
+                        <h3>Stress Level Trend</h3>
+                        <canvas id="stressChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>Recent Activity</h3>
+                        <div id="recentActivity" class="activity-list">
+                            <!-- Activity items will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Profile Section -->
+            <section id="profile" class="content-section">
+                <div class="section-header">
+                    <h2>My Profile</h2>
+                    <button id="editProfileBtn" class="btn btn-secondary">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+                
+                <div class="profile-content">
+                    <div class="profile-info">
+                        <div class="info-group">
+                            <label>Full Name:</label>
+                            <span id="profileFullName">-</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Email:</label>
+                            <span id="profileEmail">-</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Phone:</label>
+                            <span id="profilePhone">-</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Department:</label>
+                            <span id="profileDepartment">-</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Position:</label>
+                            <span id="profilePosition">-</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Base Salary:</label>
+                            <span id="profileSalary">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Edit Profile Form -->
+                <div id="editProfileForm" class="edit-form" style="display: none;">
+                    <h3>Edit Profile</h3>
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="editPhone">Phone</label>
+                            <input type="text" id="editPhone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDepartment">Department</label>
+                            <input type="text" id="editDepartment" name="department">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPosition">Position</label>
+                            <input type="text" id="editPosition" name="position">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" id="cancelEditBtn" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            
+            <!-- Payslips Section -->
+            <section id="payslips" class="content-section">
+                <div class="section-header">
+                    <h2>My Payslips</h2>
+                    <button id="generatePayslipBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Generate Payslip
+                    </button>
+                </div>
+                
+                <div class="payslips-list" id="payslipsList">
+                    <!-- Payslips will be loaded here -->
+                </div>
+                
+                <!-- Generate Payslip Modal -->
+                <div id="generatePayslipModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Generate Payslip</h2>
+                        <form id="generatePayslipForm">
+                            <div class="form-group">
+                                <label for="payslipMonth">Month</label>
+                                <select id="payslipMonth" name="month" required>
+                                    <option value="">Select Month</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="payslipYear">Year</label>
+                                <input type="number" id="payslipYear" name="year" min="2020" max="2030" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Generate Payslip</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Stress Tracking Section -->
+            <section id="stress-tracking" class="content-section">
+                <div class="section-header">
+                    <h2>Stress Level Tracking</h2>
+                    <button id="addStressRecordBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Stress Record
+                    </button>
+                </div>
+                
+                <div class="stress-dashboard">
+                    <div class="stress-summary">
+                        <div class="stress-level-display">
+                            <h3>Current Stress Level</h3>
+                            <div class="stress-meter">
+                                <div class="stress-bar" id="stressBar"></div>
+                                <span id="stressLevelText">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stress-stats">
+                            <div class="stat-item">
+                                <span class="stat-value" id="avgStressLevel">-</span>
+                                <span class="stat-label">Average Stress Level</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="totalOvertimeHours">-</span>
+                                <span class="stat-label">Total Overtime Hours</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stress-history" id="stressHistory">
+                        <!-- Stress records will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Add Stress Record Modal -->
+                <div id="addStressRecordModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Add Stress Record</h2>
+                        <form id="addStressRecordForm">
+                            <div class="form-group">
+                                <label for="stressMonth">Month</label>
+                                <select id="stressMonth" name="month" required>
+                                    <option value="">Select Month</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="stressYear">Year</label>
+                                <input type="number" id="stressYear" name="year" min="2020" max="2030" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="overtimeHours">Overtime Hours</label>
+                                <input type="number" id="overtimeHours" name="overtimeHours" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="overtimeReason">Overtime Reason</label>
+                                <textarea id="overtimeReason" name="overtimeReason" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Record</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Wellness Section -->
+            <section id="wellness" class="content-section">
+                <div class="section-header">
+                    <h2>Wellness Tips</h2>
+                </div>
+                
+                <div class="wellness-tips" id="wellnessTips">
+                    <!-- Wellness tips will be loaded here -->
+                </div>
+            </section>
+            
+            <!-- Reminders Section -->
+            <section id="reminders" class="content-section">
+                <div class="section-header">
+                    <h2>My Reminders</h2>
+                    <button id="addReminderBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Reminder
+                    </button>
+                </div>
+                
+                <div class="reminders-list" id="remindersList">
+                    <!-- Reminders will be loaded here -->
+                </div>
+                
+                <!-- Add Reminder Modal -->
+                <div id="addReminderModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Add Reminder</h2>
+                        <form id="addReminderForm">
+                            <div class="form-group">
+                                <label for="reminderText">Reminder Text</label>
+                                <textarea id="reminderText" name="reminderText" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Reminder</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/employee-dashboard.js"></script>
+</body>
+</html>

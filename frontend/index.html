@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Payroll System - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1><i class="fas fa-heartbeat"></i> Stress Payroll System</h1>
+                <p>Employee Wellness & Payroll Management</p>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <p>Don't have an account? <a href="#" id="registerLink">Register here</a></p>
+            </div>
+            
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+        
+        <div class="features-preview">
+            <h3>System Features</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-user-circle"></i>
+                    <h4>Employee Portal</h4>
+                    <p>Manage your profile, view payslips, and track wellness</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Stress Monitoring</h4>
+                    <p>Track stress levels and get personalized wellness tips</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h4>Payroll Management</h4>
+                    <p>Generate payslips with stress-based adjustments</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-users-cog"></i>
+                    <h4>HR Dashboard</h4>
+                    <p>Monitor employee wellness and manage payroll</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Registration Modal -->
+    <div id="registerModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Register New Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regFullName">Full Name</label>
+                    <input type="text" id="regFullName" name="fullName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+</body>
+</html>
